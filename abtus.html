@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- head start -->
+  <head>
+    <!-- declaring meta -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- link for burger menu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- linking to css -->
+    <link rel="stylesheet" href="abtusstyle.css" />
+    <title>FloodBud - Development Team</title>
+
+    <!-- using google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kalam:wght@700&family=Neonderthaw&family=Reem+Kufi+Fun:wght@500&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+  </head>
+  <!-- head end -->
+
+  <!-- body start -->
+  <body>
+    <!-- header start -->
+    <header>
+      <!-- navigation bar contents start -->
+      <div class="navbar">
+        <div class="FBLogo"><a href="index.html">&#x2190 Home</a></div>
+
+        <!-- nav options start -->
+        <ul class="navopts">
+		  <li><a href="testuserlocate.html" class="locate">Find Flood Now (User-Based) →</a></li>
+		  <li><a href="testusersafety.html" class="locate">Provide Evacuation Routes (User-Based) →</a></li>
+          <li><a href="testlocate.html" class="locate">Locate Flood Now (Sensor Based) →</a></li>
+		  <li><a href="sign.html">Sign In/Sign Up</a></li>
+        </ul>
+        <!-- nav options end -->
+
+        <!-- hamburger button start -->
+        <div class="burgerbtn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="dropdown">
+		  <li><a href="testuserlocate" class="locate">Find Flood Now (User-Based) →</a></li>
+          <li><a href="testlocate.html" class="locate">Locate Flood Now (Sensor Based) →</a></li>
+		  <li><a href="sign.html">Sign In/Sign Up</a></li>
+        </div>
+        <!-- hamburger button end -->
+      </div>
+      <!-- navigation bar contents end -->
+    </header>
+    <!-- header end -->
+
+
+    <!-- floodbud team -->
+    <section class="floodbudteam">
+      <div class="title">
+        <h1>The FloodBud Team</h1>
+      </div>
+
+      <div class="members">
+        <div class="box">
+          <a href="https://www.facebook.com/harold.kobe.9" target="_blank"><img src="kobe.png" alt="kobe avatar"></a>
+          <h3>Billo, Harold Kobe S.</h3>
+          <h5>Developer</h5>
+        </div>
+
+        <div class="box">
+          <a href="https://www.facebook.com/JayEm1220/" target="_blank"><img src="jm.png" alt="jm avatar"></a>
+          <h3>Dignadice, John Michael P.</h3>
+          <h5>Developer</h5>
+        </div>
+
+        <div class="box">
+          <a href="https://www.facebook.com/Felipe.Domondon" target="_blank"><img src="pip.png" alt="pip avatar"></a>
+          <h3>Domondon, Philip T.</h3>
+          <h5>Developer</h5>
+        </div>
+
+      </div>
+
+    </section>
+	<!-- Katarungan Database Center -->
+<section class="katarungan-database">
+  <div class="title">
+    <h1>Katarungan Database Center & Directors</h1>
+  </div>
+  <div class="center">
+    <img src="katarungan_database.jpg" alt="Katarungan Database Center">
+	<img src="katarungan_directors.jpg" alt="Katarungan Database Center">
+  </div>
+</section>
+
+
+
+
+    <!-- script for clicking burgerbtn -->
+    <script>
+      const clickBruger = document.querySelector('.burgerbtn')
+      const clickBopts = document.querySelector('.burgerbtn i')
+      const clickDD = document.querySelector('.dropdown')
+
+      clickBruger.onclick = function()
+      {
+        clickDD.classList.toggle('open')
+        const isOpen = clickDD.classList.contains('open')
+
+        clickBopts.classList = isOpen
+          ? 'fa-solid fa-xmark'
+          : 'fa-solid fa-bars'
+      }
+    </script>
+
+  </body>
+  <!-- body end -->
+
+</html>

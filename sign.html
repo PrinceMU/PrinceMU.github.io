@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="sign.css">
+
+  <!-- declaring meta -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- link for burger menu -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- linking to css -->
+  <link rel="stylesheet" href="sign.css" />
+  <title>FloodBud - Sign In/Sign Up</title>
+
+  <!-- using google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kalam:wght@700&family=Neonderthaw&family=Reem+Kufi+Fun:wght@500&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Updated CSS for flickering icons */
+    .flood-icon {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      animation: flicker 1s infinite;
+    }
+
+    @keyframes flicker {
+      0%,
+      100% {
+        opacity: 0.2;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container-wrapper">
+    <div class="floodbudlogo">
+      <p>FloodBud</p>
+    </div>
+    <div class="form-container">
+      <form action="signin.php" method="post">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" placeholder="Enter Username" required><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" placeholder="Enter Password" required><br>
+		
+        <input type="submit" id="signin" value="Sign In">
+      </form>
+		<a href="signup.html">
+			<button class="styled-button" id="signup">Sign Up</button>
+		</a>
+		<a href="index.html">
+			<button class="styled-button" id="signup">Back to Home</button>
+		</a>
+    </div>
+  </div>
+
+<!-- Container for icons -->
+<div id="icons-container"></div>
+
+<!-- Script for flickering icons -->
+<script>
+  // Function to get a random position within the page
+  function getRandomPosition() {
+    var screenWidth = window.innerWidth;
+    var screenHeight = window.innerHeight;
+    var randomX = Math.floor(Math.random() * (screenWidth - 50));
+    var randomY = Math.floor(Math.random() * (screenHeight - 50));
+    return { x: randomX, y: randomY };
+  }
+
+  // Function to create an icon element
+function createIconElement(iconUrl) {
+  var iconElement = document.createElement("img");
+  iconElement.src = iconUrl;
+  iconElement.classList.add("flood-icon");
+  
+  var initialPosition = getRandomPosition();
+  iconElement.style.left = initialPosition.x + "px";
+  iconElement.style.top = initialPosition.y + "px";
+  
+  return iconElement;
+}
+
+
+  // Function to update the positions of the icons
+  function updateIconPositions() {
+    var iconsContainer = document.getElementById("icons-container");
+    var icons = iconsContainer.getElementsByClassName("flood-icon");
+
+    Array.from(icons).forEach(function (icon) {
+      var randomPosition = getRandomPosition();
+      icon.style.left = randomPosition.x + "px";
+      icon.style.top = randomPosition.y + "px";
+    });
+  }
+
+  // Function to add icons to the container and start the timer
+  function addIconsToContainer() {
+    var iconsContainer = document.getElementById("icons-container");
+    var icons = [
+      "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+      "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+      "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+	  "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+      "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+      "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+    ];
+
+    icons.forEach(function (iconUrl) {
+      var iconElement = createIconElement(iconUrl);
+      iconsContainer.appendChild(iconElement);
+    });
+
+    // Set the timer to update icon positions every 3 seconds
+    setInterval(updateIconPositions, 2000);
+  }
+
+  // Call the function to add icons when the page loads
+  window.addEventListener("load", addIconsToContainer);
+</script>
+<script>
+  // Parse the URL parameters
+  var urlParams = new URLSearchParams(window.location.search);
+
+  // If the 'message' parameter is 'invalid', show an alert
+  if (urlParams.get('message') === 'invalid') {
+    alert('Invalid username or password.');
+  }
+</script>
+
+
+</body>
+</html>
+

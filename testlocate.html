@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="testlocate.css" />
+    <title>FloodBud - Locate Flood</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kalam:wght@700&family=Neonderthaw&family=Reem+Kufi+Fun:wght@500&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+    <style>
+      #map {
+        height: 800px;
+        width: 1500px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="FBLogo"><a href="index.html">&#x2190 Home</a></div>
+
+        <!-- nav options start -->
+        <ul class="navopts">
+		  <li><a href="testuserlocate.html" class="locate">Find Flood Now (User-Based) →</a></li>
+		  <li><a href="testusersafety.html" class="locate">Provide Evacuation Routes (User-Based) →</a></li>
+		  <li><a href="sign.html" class ="signinsignup">Sign In/Sign Up</a></li>
+        </ul>
+        <!-- nav options end -->
+
+        <!-- hamburger button start -->
+        <div class="burgerbtn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="dropdown">
+		  <li><a href="testuserlocate" class="locate">Find Flood Now (User-Based) →</a></li>
+		  <li><a href="testusersafety.html" class="locate">Provide Evacuation Routes (User-Based) →</a></li>
+		  <li><a href="sign.html" class ="signinsignup">Sign In/Sign Up</a></li>
+        </div>
+        <!-- hamburger button end -->
+      </div>
+      <!-- navigation bar contents end -->
+    </header>
+
+    <div class="container">
+      <div id="map"></div>
+    </div>
+
+    <script>
+      function initMap() {
+        const mapOptions = {
+          zoom: 10,
+          center: { lat: 14.387581, lng: 121.031331 }, // Main Area Coordinates
+        };
+
+        const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        const markers = [
+          {
+            lat: 14.387581,
+            lng: 121.031331,
+            comment: "Flooded Area 1",
+            infoWindowContent: {
+              location: "Flood Monitoring Location: Area 1",
+              level: "Flood Level: High",
+              depth: "Flood Depth: 2 meters",
+              vehicles: "Vehicle Types Passable: Cars, SUVs",
+            },
+            icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" // Set marker icon to blue
+          },
+          {
+            lat: 14.386910,
+            lng: 121.015060,
+            comment: "Flooded Area 2",
+            infoWindowContent: {
+              location: "Flood Monitoring Location: Area 2",
+              level: "Flood Level: Moderate",
+              depth: "Flood Depth: 1.5 meters",
+              vehicles: "Vehicle Types Passable: Motorcycles, Small Cars",
+            },
+            icon: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" // Set marker icon to yellow
+          },
+          {
+            lat: 14.387250,
+            lng: 121.017410,
+            comment: "Flooded Area 3",
+            infoWindowContent: {
+              location: "Flood Monitoring Location: Area 3",
+              level: "Flood Level: Low",
+              depth: "Flood Depth: 1 meter",
+              vehicles: "Vehicle Types Passable: Pedestrians",
+            },
+            icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png" // Set marker icon to red
+          },
+          {
+            lat: 14.399390,
+            lng: 121.036910,
+            comment: "Evacuation Route 1",
+            infoWindowContent: {
+              location: "Evacuation Route Location: Route 1",
+              tools: "Safety Tools: Life Jackets, Rescue Boats",
+              staff: "Safety Staff: Trained Lifeguards, Emergency Responders",
+            },
+            icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" // Set marker icon to green
+          },
+          {
+            lat: 14.386140,
+            lng: 121.018710,
+            comment: "Evacuation Route 2",
+            infoWindowContent: {
+              location: "Evacuation Route Location: Route 2",
+              tools: "Safety Tools: Emergency First Aid Kits, Megaphones",
+              staff: "Safety Staff: Volunteers, Community Leaders",
+            },
+            icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" // Set marker icon to green
+          },
+        ];
+
+        markers.forEach((marker) => {
+          const infoWindow = new google.maps.InfoWindow({
+            content: `
+              <h3>${marker.comment}</h3>
+              ${
+                marker.comment.startsWith("Flooded Area")
+                  ? `<p>${marker.infoWindowContent.location}</p>
+                     <p>${marker.infoWindowContent.level}</p>
+                     <p>${marker.infoWindowContent.depth}</p>
+                     <p>${marker.infoWindowContent.vehicles}</p>`
+                  : `<p>${marker.infoWindowContent.location}</p>
+                     <p>${marker.infoWindowContent.tools}</p>
+                     <p>${marker.infoWindowContent.staff}</p>`
+              }
+            `,
+          });
+
+          const markerObject = new google.maps.Marker({
+            position: marker,
+            map: map,
+            icon: marker.icon // Set the marker icon based on the icon property
+          });
+
+          markerObject.addListener("click", () => {
+            infoWindow.open(map, markerObject);
+          });
+        });
+      }
+
+      const clickBruger = document.querySelector('.burgerbtn');
+      const clickBopts = document.querySelector('.burgerbtn i');
+      const clickDD = document.querySelector('.dropdown');
+
+      clickBruger.onclick = function() {
+        clickDD.classList.toggle('open');
+        const isOpen = clickDD.classList.contains('open');
+
+        clickBopts.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+      };
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-dFHYjTqEVLndbN2gdvXsx09jfJHmNc8&callback=initMap"></script>
+  </body>
+</html>
+
+
+

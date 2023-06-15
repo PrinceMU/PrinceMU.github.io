@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- head start -->
+  <head>
+    <!-- declaring meta -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- link for burger menu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- linking to css -->
+    <link rel="stylesheet" href="testhome.css" />
+    <title>FloodBud - Home</title>
+
+    <!-- using google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kalam:wght@700&family=Neonderthaw&family=Reem+Kufi+Fun:wght@500&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+	
+	
+
+
+
+
+
+  </head>
+  <!-- head end -->
+
+  <!-- body start -->
+  <body>
+    <!-- header start -->
+    <header>
+      <!-- navigation bar contents start -->
+      <div class="navbar">
+        <div class="FBLogo"><a href="index.html">FloodBud!</a></div>
+
+        <!-- nav options start -->
+        <ul class="navopts">
+		  <li><a href="abtus.html">About Us</a></li>
+		  <li><a href="testuserlocate.html" class="locate">Find Flood Now (User-Based) →</a></li>
+		  <li><a href="testusersafety.html" class="locate">Provide Evacuation Routes (User-Based) →</a></li>
+          <li><a href="testlocate.html" class="locate">Locate Flood Now (Sensor Based) →</a></li>
+		  <li><a href="sign.html">Sign In/Sign Up</a></li>
+        </ul>
+        <!-- nav options end -->
+
+        <!-- hamburger button start -->
+        <div class="burgerbtn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="dropdown">
+          <li><a href="abtus.html">About Us</a></li>
+		  <li><a href="testuserlocate" class="locate">Find Flood Now (User-Based) →</a></li>
+		  <li><a href="testusersafety.html" class="locate">Provide Evacuation Routes (User-Based) →</a></li>
+          <li><a href="testlocate.html" class="locate">Locate Flood Now (Sensor Based) →</a></li>
+		  <li><a href="sign.html">Sign In/Sign Up</a></li>
+        </div>
+        <!-- hamburger button end -->
+      </div>
+      <!-- navigation bar contents end -->
+    </header>
+    <!-- header end -->
+
+
+    <div  class="container">
+      <!-- leftpane start -->
+      <div class="leftpaneext">
+	  <div id="icon-area" class="container">
+        <div id="leftpaneint">
+          <h1 class="title"> FloodBud!</h1>
+          <p class="descri">When there's flood on the <br>
+            street, FloodBud can't be <br> beat!</p>
+        </div>
+      </div>
+	  </div>
+      <!-- leftpane end -->
+
+      <!-- rightpane start -->
+      <div id="rightpaneext">
+        <div class="rightpaneint">
+          <img src="sensor.png" alt="FloodBud sensor" class="sensor">
+        </div>
+      </div>
+      <!-- rightpane end -->
+    </div>
+    <!-- container end -->
+
+
+
+
+
+
+
+    <!-- script for clicking burgerbtn -->
+    <script>
+      const clickBruger = document.querySelector('.burgerbtn')
+      const clickBopts = document.querySelector('.burgerbtn i')
+      const clickDD = document.querySelector('.dropdown')
+
+      clickBruger.onclick = function()
+      {
+        clickDD.classList.toggle('open')
+        const isOpen = clickDD.classList.contains('open')
+
+        clickBopts.classList = isOpen
+          ? 'fa-solid fa-xmark'
+          : 'fa-solid fa-bars'
+      }
+    </script>
+<script>
+  
+  <script>
+  // Parse the URL parameters
+  var urlParams = new URLSearchParams(window.location.search);
+
+  // If the 'message' parameter is 'invalid', show an alert
+  if (urlParams.get('message') === 'invalid') {
+    alert('Passwords do not match.');
+  }
+</script>
+  </body>
+  <!-- body end -->
+
+</html>

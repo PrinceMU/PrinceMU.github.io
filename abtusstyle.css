@@ -1,0 +1,231 @@
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Reem Kufi Fun', sans-serif;
+  text-decoration: none;
+}
+body
+{
+  height: 100vh;
+  background-image: url(newmap.jpg);
+}
+
+/* floodbudteam */
+.floodbudteam
+{
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  background-color: #577ff9;
+  border-radius: 35px 35px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.members
+{
+  width: 100%;
+  max-width: 1350px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px,auto));
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+  margin-top: 4rem;
+}
+.members img
+{
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+.title h1
+{
+  color: white;
+  font-size: 4rem;
+  text-align: center;
+}
+.box
+{
+  padding: 16px;
+  border-radius: 15px;
+  transition: all .38s ease;
+}
+.box h3
+{
+  font-size: 25px;
+  color: white;
+}
+.box h5
+{
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 200;
+}
+.box:hover
+{
+  background: #466bdb;
+  transform: translateY(-15px);
+}
+
+
+
+
+/* navbar codes */
+li
+{
+  list-style: none;
+}
+a
+{
+  text-decoration: none;
+  color: #577ff9;
+  border-bottom: 2px solid transparent;
+  transition: all .55s linear;
+}
+a:hover
+{
+  border-bottom: 2px solid;
+}
+header
+{
+  background-color: transparent;
+  position: relative;
+  padding: 01rem;
+}
+.navbar
+{
+  width: 100%;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar .FBLogo a
+{
+  color: #577ff9;
+  border-bottom: none;
+  font-size: 40px;
+  font-weight: bold;
+}
+.navbar .navopts
+{
+  font-size: 20px;
+  display: flex;
+  gap: 2rem;
+}
+.navbar .navopts .locate
+{
+  background-color: orange;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-size: 20px;
+}
+.navbar .navopts .locate:hover
+{
+  background-color: #577ff9;
+}
+
+/* burgerbtn codes */
+.navbar .burgerbtn
+{
+  color: #577ff9;
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+  transition: all .3s linear;
+
+}
+.navbar .burgerbtn:hover
+{
+  background-color: #577ff9;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+}
+
+/* dropdown codes */
+.dropdown
+{
+  display: none;
+  position: absolute;
+  margin: 40px;
+  right: 2rem;
+  top: 60px;
+  height: 0px;
+  width: 200px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown.open
+{
+  height: 140px;
+  background-color: #577ff9;
+}
+
+.dropdown li
+{
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dropdown a
+{
+  color: white;
+}
+
+/* code lines for responsive design */
+
+@media (max-width: 576px)
+{
+  .title h1
+  {
+    font-size: 3rem;
+  }
+}
+/* Katarungan Database Center */
+.katarungan-database
+{
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: #577ff9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+}
+.katarungan-database .title h1
+{
+  color: white;
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.katarungan-database .center img
+{
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 15px;
+  object-fit: cover;
+  margin: 1rem; /* Add margin to create space between the images */
+}
+
+

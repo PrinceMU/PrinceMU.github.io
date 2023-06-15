@@ -1,0 +1,202 @@
+/* Reset and common styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Reem Kufi Fun', sans-serif;
+  text-decoration: none;
+}
+
+body {
+  height: 100vh;
+  background-color: #dcdcdc;
+}
+
+li {
+  list-style: none;
+}
+a
+{
+  text-decoration: none;
+  color: #577ff9;
+  border-bottom: 2px solid transparent;
+  transition: all .55s linear;
+}
+
+/* Navbar styles */
+header {
+  background-color: #577ff9;
+  position: relative;
+  padding: 0.1rem;
+}
+
+.signinsignup{
+  color: white;
+
+}
+
+.navbar {
+  width: 100%;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .FBLogo a {
+  color: white;
+  border-bottom: none;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.navbar .navopts {
+  font-size: 20px;
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar .navopts .locate {
+  background-color: orange;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 20px;
+}
+
+.navbar .navopts .locate:hover {
+  background-color: #577ff9;
+}
+
+.navbar .burgerbtn {
+  color: #577ff9;
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+  transition: all 0.3s linear;
+}
+
+.navbar .burgerbtn:hover {
+  background-color: #577ff9;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+}
+
+/* Dropdown styles */
+.dropdown {
+  display: none;
+  position: absolute;
+  margin: 40px;
+  right: 2rem;
+  top: 60px;
+  height: 0px;
+  width: 200px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown.open {
+  height: 140px;
+  background-color: #577ff9;
+}
+
+.dropdown li {
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown a {
+  color: white;
+}
+
+/* Maps styles */
+.container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container p {
+  border-radius: 50px 0px 0px 0px;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .navbar .navopts {
+    display: none;
+  }
+
+  .navbar .burgerbtn {
+    display: block;
+  }
+
+  .dropdown {
+    display: block;
+  }
+
+  .sensor {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .dropdown {
+    left: 2rem;
+    width: unset;
+  }
+}
+
+h3
+{
+	color: black;
+	font-weight: normal;
+}
+
+/*
+      #map {
+        height: 800px;
+        width: 1500px;
+      }
+
+      .marker-window {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 300px;
+      }
+
+      .marker-window h3 {
+        margin: 0 0 10px;
+        font-size: 100px;
+        font-weight: bold;
+      }
+
+      .marker-window p {
+        margin: 0 0 5px;
+        font-size: 14px;
+      }
+
+      .marker-window button {
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      .marker-window button i {
+        margin-right: 5px;
+      }
+	*/

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="testlocate.css" />
+  <title>FloodBud - Locate Flood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kalam:wght@700&family=Neonderthaw&family=Reem+Kufi+Fun:wght@500&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+  <style>
+    #map {
+      height: 800px;
+      width: 1500px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <!-- navigation bar contents start -->
+      <div class="navbar">
+        <div class="FBLogo"><a href="index.html">&#x2190 Home</a></div>
+
+        <!-- nav options start -->
+        <ul class="navopts">
+		  <li><a href="testusersafety.html" class="locate">Provide Evacuation Routes (User-Based) →</a></li>
+          <li><a href="testlocate.html" class="locate">Locate Flood Now (Sensor Based) →</a></li>
+		  <li><a href="sign.html" class ="signinsignup">Sign In/Sign Up</a></li>
+        </ul>
+        <!-- nav options end -->
+
+        <!-- hamburger button start -->
+        <div class="burgerbtn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="dropdown">
+          <li><a href="testlocate.html" class="locate">Locate Flood Now (Sensor Based) →</a></li>
+		  <li><a href="testusersafety.html" class="locate">Provide Evacuation Routes (User-Based) →</a></li>
+		  <li><a href="sign.html" class ="signinsignup">Sign In/Sign Up</a></li>
+        </div>
+        <!-- hamburger button end -->
+      </div>
+      <!-- navigation bar contents end -->
+  </header>
+
+  <div class="container">
+    <div id="map"></div>
+  </div>
+
+  <script>
+    let markerId = 1;
+    const markerData = [];
+    let markerCount = 0; // Track the number of markers placed
+    const markerLimit = 3; // Limit for the number of markers per day
+
+    function initMap() {
+      const mapOptions = {
+        zoom: 10,
+        center: { lat: 14.387581, lng: 121.031331 },
+      };
+
+      const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      const markers = [];
+
+      function addMarker(location, comment, areaName) {
+        if (markerCount >= markerLimit) {
+          alert("You have already placed 3 markers for today. Please wait until 24 hours to add more markers.");
+          return;
+        }
+
+        const marker = new google.maps.Marker({
+          position: location,
+          map: map,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: "blue",
+            fillOpacity: 1,
+            strokeColor: "white",
+            strokeWeight: 1.5,
+            scale: 10,
+          },
+          draggable: true,
+        });
+
+        const infoWindow = new google.maps.InfoWindow();
+
+        const id = markerId++;
+        marker.id = id;
+
+        marker.addListener("click", () => {
+  const data = markerData.find((item) => item.id === id);
+
+  const content = `
+    <h1>Flooded Area: ${data.areaName}</h1>
+    <h3>Flood Comment: ${data.comment}</h3>
+    <input type="file" id="uploadImage${id}" accept="image/jpeg, image/png, image/jpg">
+    <img id="outputImage${id}" src="${data.image || ''}" style="display: ${data.image ? 'block' : 'none'};" />
+    <div style="display: flex; justify-content: center;">
+      <button onclick="handleLike(${id})"><i class="far fa-thumbs-up" style="margin-right: 5px;"></i> <span id="likeCount${id}">${data.likes}</span></button>
+      <button onclick="handleDislike(${id})"><i class="far fa-thumbs-down" style="margin-right: 5px;"></i> <span id="dislikeCount${id}">${data.dislikes}</span></button>
+      <button onclick="handleRemove(${id})">Remove</button>
+    </div>
+  `;
+
+  infoWindow.setContent(content);
+  infoWindow.open(map, marker);
+});
+
+
+  google.maps.event.addListener(infoWindow, 'domready', function() {
+  const uploadImage = document.getElementById(`uploadImage${id}`);
+  const outputImage = document.getElementById(`outputImage${id}`);
+
+  uploadImage.addEventListener("change", function() {
+    outputImage.style.display = "block"; // Make the image visible
+    outputImage.src = URL.createObjectURL(this.files[0]);
+
+    const reader = new FileReader(); // create a new FileReader
+    reader.onloadend = function() {
+      const dataURL = reader.result; // this will contain the image data URL when loading is finished
+      const markerDataItem = markerData.find((item) => item.id === id);
+      markerDataItem.image = dataURL; // update the markerDataItem
+    }
+    reader.readAsDataURL(this.files[0]); // start reading the file
+  });
+});
+
+
+
+
+        markers.push(marker);
+
+        const markerDataItem = {
+  id: id,
+  location: location.toString(),
+  comment: comment,
+  areaName: areaName,
+  likes: 0,
+  dislikes: 0,
+  marker: marker,
+  image: null, // add this line
+};
+
+
+        markerData.push(markerDataItem);
+        markerCount++; // Increment the marker count
+      }
+
+      markers.forEach((marker) => {
+        marker.setMap(map);
+      });
+
+      map.addListener("click", (event) => {
+        const location = event.latLng;
+		const areaName = prompt("Area Affected:");
+        const comment = prompt("Comment about the flood:");
+
+        addMarker(location, comment, areaName);
+      });
+    }
+
+    function handleLike(id) {
+      const likeCount = document.getElementById(`likeCount${id}`);
+      const markerDataItem = markerData.find((item) => item.id === id);
+
+      markerDataItem.likes++;
+      likeCount.textContent = markerDataItem.likes;
+    }
+
+    function handleDislike(id) {
+      const dislikeCount = document.getElementById(`dislikeCount${id}`);
+      const markerDataItem = markerData.find((item) => item.id === id);
+
+      markerDataItem.dislikes++;
+      dislikeCount.textContent = markerDataItem.dislikes;
+    }
+
+    function handleRemove(id) {
+      const markerDataItem = markerData.find((item) => item.id === id);
+      const index = markerData.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        markerData.splice(index, 1);
+        markerDataItem.marker.setMap(null);
+      }
+    }
+
+    const clickBruger = document.querySelector('.burgerbtn');
+    const clickBopts = document.querySelector('.burgerbtn i');
+    const clickDD = document.querySelector('.dropdown');
+
+    clickBruger.onclick = function() {
+      clickDD.classList.toggle('open');
+      const isOpen = clickDD.classList.contains('open');
+
+      clickBopts.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    };
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-dFHYjTqEVLndbN2gdvXsx09jfJHmNc8&callback=initMap"></script>
+</body>
+</html>

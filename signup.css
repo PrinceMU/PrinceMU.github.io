@@ -1,0 +1,286 @@
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  background-image: url(newmap1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.form-container,
+.signup-form-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+  background-color: white;
+  margin-top: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.signup-form-container {
+  width: 350px;
+  background-color: #f5f5f5;
+  margin-top: 50px;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+}
+
+form {
+  margin-bottom: 10px;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type=submit], .signup-form-container button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+input[type=submit]:hover, .signup-form-container button:hover {
+  opacity:1;
+}
+
+button {
+  width: 100%;
+  background-color: #008CBA;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #007B8A;
+}
+
+.signup-form-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Reem Kufi Fun', sans-serif;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #577ff9;
+  border-bottom: 2px solid transparent;
+  transition: all .55s linear;
+}
+
+a:hover {
+  border-bottom: 2px solid;
+}
+
+header {
+  background-color: transparent;
+  position: relative;
+  padding: 01rem;
+}
+
+.navbar {
+  width: 100%;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.floodbudlogo  {
+  color: #577ff9;
+  border-bottom: none;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.floodbudlogo {
+  text-align: center;
+}
+
+.navbar .FBLogo a {
+  color: #577ff9;
+  border-bottom: none;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.navbar .navopts {
+  font-size: 20px;
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar .navopts .locate {
+  background-color: orange;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-size: 20px;
+}
+
+.navbar .navopts .locate:hover {
+  background-color: #577ff9;
+}
+
+.navbar .burgerbtn {
+  color: #577ff9;
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+  transition: all .3s linear;
+}
+
+.navbar .burgerbtn:hover {
+  background-color: #577ff9;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  margin: 40px;
+  right: 2rem;
+  top: 60px;
+  height: 0px;
+  width: 200px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown.open {
+  height: 140px;
+  background-color: #577ff9;
+}
+
+.dropdown li {
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown a {
+  color: white;
+}
+
+#leftpaneext {
+  height: 100%;
+  width: 10%;
+  background: orchid;
+  float: left;
+}
+
+.title {
+  margin: 200px;
+  margin-bottom: 10px;
+  text-align: left;
+  height: 100%;
+  width: 100%;
+  font-size: 80px;
+}
+
+.title:hover {
+  color:#577ff9
+  height: 100%;
+  width: 100%;
+  font-size: 80px;
+}
+
+.descri {
+  margin: 200px;
+  margin-top: 10px;
+  text-align: left;
+  height: 100%;
+  width: 100%;
+  font-size: 30px;
+}
+
+#rightpaneext {
+  box-shadow: 5px 10px;
+  margin-top: 10px;
+  height: 100%;
+  width: 60%;
+  background: #577ff9;
+  opacity: 100%;
+  float: left;
+  border-radius: 50px 0px 0px 50px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.rightpane {
+  align-items: center;
+  background-color: #577ff9;
+}
+
+.sensor {
+  margin: 150px;
+  align-items: center;
+  height: 500px;
+}
+
+@media (max-width: 992px) {
+  .navbar .navopts {
+    display: none;
+  }
+
+  .navbar .burgerbtn {
+    display: block;
+  }
+
+  .dropdown {
+    display: block;
+  }
+
+  .sensor {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .dropdown {
+    left: 2rem;
+    width: unset;
+  }
+}

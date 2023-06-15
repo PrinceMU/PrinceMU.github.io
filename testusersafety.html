@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="testlocate.css" />
+  <title>FloodBud - Locate Flood</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kalam:wght@700&family=Neonderthaw&family=Reem+Kufi+Fun:wght@500&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    #map {
+      height: 800px;
+      width: 1500px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+     <div class="navbar">
+      <!-- navigation bar contents start -->
+      <div class="navbar">
+        <div class="FBLogo"><a href="index.html">&#x2190 Home</a></div>
+
+        <!-- nav options start -->
+        <ul class="navopts">
+		  <li><a href="testuserlocate.html" class="locate">Find Flood Now (User-Based) →</a></li>
+          <li><a href="testlocate.html" class="locate">Locate Flood Now (Sensor Based) →</a></li>
+		  <li><a href="sign.html" class ="signinsignup">Sign In/Sign Up</a></li>
+        </ul>
+        <!-- nav options end -->
+
+        <!-- hamburger button start -->
+        <div class="burgerbtn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="dropdown">
+          <li><a href="testuserlocate.html" class="locate">Find Flood Now (User-Based) →</a></li>
+		  <li><a href="testlocate.html" class="locate">Locate Flood Now (Sensor Based) →</a></li>
+		  <li><a href="sign.html" class ="signinsignup">Sign In/Sign Up</a></li>
+        </div>
+        <!-- hamburger button end -->
+      </div>
+  </header>
+
+  <div class="container">
+    <div id="map"></div>
+  </div>
+
+  <script>
+    let markerId = 1; // Track the ID of each marker
+    const markerData = []; // Array to store marker data
+
+    function initMap() {
+      const mapOptions = {
+        zoom: 10,
+        center: { lat: 14.387581, lng: 121.031331 }, // Main Area Coordinates
+      };
+
+      const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      const markers = [];
+
+      function addMarker(location) {
+        const marker = new google.maps.Marker({
+          position: location,
+          map: map,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: "green",
+            fillOpacity: 1,
+            strokeColor: "white",
+            strokeWeight: 1.5,
+            scale: 10,
+          },
+          draggable: true,
+        });
+
+        const infoWindow = new google.maps.InfoWindow();
+
+        // Create a unique ID for each marker
+        const id = markerId++;
+        marker.id = id;
+
+        marker.addListener("click", () => {
+          // Get the marker data based on the ID
+          const data = markerData.find((item) => item.id === id);
+
+          // Generate HTML for the info window content
+          const content = `
+            <h3>${data.evacuationArea}</h3>
+			<h3>Address: ${data.address}</h3>
+			<h3>Safety Equipment: ${data.safetyEquipment.join(", ")}</h3>
+            <div style="display: flex; justify-content: center;">
+              <button onclick="handleLike(${id})"><i class="far fa-thumbs-up" style="margin-right: 5px;"></i> <span id="likeCount${id}">${data.likes}</span></button>
+              <button onclick="handleDislike(${id})"><i class="far fa-thumbs-down" style="margin-right: 5px;"></i> <span id="dislikeCount${id}">${data.dislikes}</span></button>
+              <button onclick="handleRemove(${id})">Remove</button>
+            </div>
+          `;
+
+          infoWindow.setContent(content);
+          infoWindow.open(map, marker);
+        });
+
+        markers.push(marker);
+      }
+
+      markers.forEach((marker) => {
+        marker.setMap(map);
+      });
+
+      map.addListener("click", (event) => {
+        const location = event.latLng;
+
+        const evacuationArea = prompt("Evacuation Area:");
+        const safetyEquipment = prompt("Safety Equipment (separate choices with comma):");
+        const address = prompt("Address:");
+
+        const safetyEquipmentArray = safetyEquipment.split(",").map((item) => item.trim());
+
+        // Initialize likes and dislikes to 0 for the marker
+        const markerDataItem = {
+          id: markerId,
+          evacuationArea: evacuationArea,
+          safetyEquipment: safetyEquipmentArray,
+          address: address,
+          likes: 0,
+          dislikes: 0,
+        };
+
+        addMarker(location);
+        markerData.push(markerDataItem);
+      });
+    }
+
+    // Handle the 'Like' button click
+    function handleLike(id) {
+      const likeCount = document.getElementById(`likeCount${id}`);
+      const markerDataItem = markerData.find((item) => item.id === id);
+
+      markerDataItem.likes++;
+      likeCount.textContent = markerDataItem.likes;
+    }
+
+    // Handle the 'Dislike' button click
+    function handleDislike(id) {
+      const dislikeCount = document.getElementById(`dislikeCount${id}`);
+      const markerDataItem = markerData.find((item) => item.id === id);
+
+      markerDataItem.dislikes++;
+      dislikeCount.textContent = markerDataItem.dislikes;
+    }
+
+    // Handle the 'Remove' button click
+    function handleRemove(id) {
+      const markerIndex = markerData.findIndex((item) => item.id === id);
+      if (markerIndex > -1) {
+        markerData.splice(markerIndex, 1);
+      }
+
+      const markerToRemove = markers.find((marker) => marker.id === id);
+      if (markerToRemove) {
+        markerToRemove.setMap(null);
+      }
+    }
+
+    const clickBruger = document.querySelector('.burgerbtn');
+    const clickBopts = document.querySelector('.burgerbtn i');
+    const clickDD = document.querySelector('.dropdown');
+
+    clickBruger.onclick = function() {
+      clickDD.classList.toggle('open');
+      const isOpen = clickDD.classList.contains('open');
+
+      clickBopts.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    };
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-dFHYjTqEVLndbN2gdvXsx09jfJHmNc8&callback=initMap"></script>
+</body>
+</html>
